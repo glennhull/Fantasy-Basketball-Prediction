@@ -1,10 +1,10 @@
-from stattlepy import Stattleship
-import pandas as pd
+#from stattlepy import Stattleship
+#import pandas as pd
 import csv
 import random
 
-new_query = Stattleship()
-token = new_query.set_token('71c379b013f38f528b7c7461cea6a46e')
+#new_query = Stattleship()
+#token = new_query.set_token('71c379b013f38f528b7c7461cea6a46e')
 #output is a list of dicts, where each dict's values are lists of stats... list-dict-list-float (example of how data comes in)
 #output = new_query.ss_get_results(sport='basketball',league='nba',ep='player_season_stats',player_id='nba-brandon-ingram',on='today')
 output = {}
@@ -51,29 +51,28 @@ def projection(mins, pts, tov, tp, fdfp):
     return pred
 
 def generate_random_pred(num_pred):
-    preds = []
+    preds_dict = {}
+    preds_dict['playerID'] = []
+    preds_dict['points'] = []
+    preds_dict['salary'] = []
+    preds_dict['position'] = []
     for i in range(num_pred):
         rnd_m = random.randint(15,30)
         rnd_p = random.randint(5,40)
         rnd_tov = random.randint(0,10)
         rnd_tp = random.randint(0,10)
         rnd_fd = random.randint(10,70)
-
-        proj = projection(rnd_m, rnd_p, rnd_tov, rnd_tp, rnd_fd)
-        preds.append(proj)
-
-    return preds
-
-def generate_random_price(num_pred):
-    prices = []
-    for i in range(num_pred):
         price = random.randint(3000,12000)
-        prices.append(price)
-    return prices
+        position = random.randint(1,5)
+        playerID = i
+        proj = projection(rnd_m, rnd_p, rnd_tov, rnd_tp, rnd_fd)
+        preds_dict['points'].append(proj)
+        preds_dict['salary'].append(price)
+        preds_dict['playerID'].append(playerID)
+        preds_dict['position'].append(position)
 
+    return preds_dict
 
-print generate_random_pred(10)  
-print generate_random_price(10)  
 
 #aggregate_season_avgs()    
 
