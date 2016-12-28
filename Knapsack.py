@@ -32,15 +32,33 @@ for i in range(20):
 def knapsack(players):
 	budget = 60000
 	used_cap_space = 0
+	
+	pos_constraints = {
+		'1' : 2,
+		'2' : 2,
+		'3' : 2,
+		'4' : 2,
+		'5' : 1
+	}
 
+	pos_count = {
+		'1' : 0,
+		'2' : 0,
+		'3' : 0,
+		'4' : 0,
+		'5' : 0
+	}
 
 	players.sort(key = lambda x: x.value, reverse = True)
 	team = []
 
 	for player in players:
-		if used_cap_space + player.salary < budget and len(team) < 9:
+		pos = player.position
+		sal = player.salary
+		if used_cap_space + salary < budget and pos_count[pos] < pos_constraints[pos]:
 			team.append(player)
-			used_cap_space = used_cap_space + player.salary
+			used_cap_space = used_cap_space + salary
+			pos_count[pos] = pos_count[pos] + 1
 			continue
 
 	players.sort(key = lambda x: x.points, reverse = True)
